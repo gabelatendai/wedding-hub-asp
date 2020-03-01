@@ -45,10 +45,18 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -120,13 +128,126 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Class1.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Crypto.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Extended\User.cs" />
+    <Compile Include="Models\MyModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MyModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MyModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MyModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MyModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MyModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\User.cs">
+      <DependentUpon>MyModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UserLogin.cs" />
+    <Compile Include="Models\Vendor.cs">
+      <DependentUpon>MyModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Vendors.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="AdminStyles\css\bootstrap.css" />
+    <Content Include="AdminStyles\css\bootstrap.min.css" />
+    <Content Include="AdminStyles\css\dataTables.bootstrap.css" />
+    <Content Include="AdminStyles\css\datatables.css" />
+    <Content Include="AdminStyles\css\jquery-ui.css" />
+    <Content Include="AdminStyles\css\jquery.rateyo.css" />
+    <Content Include="AdminStyles\css\jquery.rateyo.min.css" />
+    <Content Include="AdminStyles\css\magicsuggest.css" />
+    <Content Include="AdminStyles\css\magnific-popup.css" />
+    <Content Include="AdminStyles\css\offcanvas.css" />
+    <Content Include="AdminStyles\css\owl.carousel.css" />
+    <Content Include="AdminStyles\css\owl.theme.default.css" />
+    <Content Include="AdminStyles\css\style.css" />
+    <Content Include="AdminStyles\css\summernote-bs4.css" />
+    <Content Include="AdminStyles\email-template\forgot-password.html" />
+    <Content Include="AdminStyles\email-template\images\logo.png" />
+    <Content Include="AdminStyles\email-template\new-id-password.html" />
+    <Content Include="AdminStyles\email-template\reset-password.html" />
+    <Content Include="AdminStyles\email-template\style.css" />
+    <Content Include="AdminStyles\fontawesome\css\fa-brands.css" />
+    <Content Include="AdminStyles\fontawesome\css\fa-brands.min.css" />
+    <Content Include="AdminStyles\fontawesome\css\fa-regular.css" />
+    <Content Include="AdminStyles\fontawesome\css\fa-regular.min.css" />
+    <Content Include="AdminStyles\fontawesome\css\fa-solid.css" />
+    <Content Include="AdminStyles\fontawesome\css\fa-solid.min.css" />
+    <Content Include="AdminStyles\fontawesome\css\fontawesome-all.css" />
+    <Content Include="AdminStyles\fontawesome\css\fontawesome-all.min.css" />
+    <Content Include="AdminStyles\fontawesome\css\fontawesome.css" />
+    <Content Include="AdminStyles\fontawesome\css\fontawesome.min.css" />
+    <Content Include="AdminStyles\fontawesome\webfonts\fa-brands-400.svg" />
+    <Content Include="AdminStyles\fontawesome\webfonts\fa-regular-400.svg" />
+    <Content Include="AdminStyles\fontawesome\webfonts\fa-solid-900.svg" />
+    <Content Include="AdminStyles\fontello\css\animation.css" />
+    <Content Include="AdminStyles\fontello\css\fontello-codes.css" />
+    <Content Include="AdminStyles\fontello\css\fontello-embedded.css" />
+    <Content Include="AdminStyles\fontello\css\fontello-ie7-codes.css" />
+    <Content Include="AdminStyles\fontello\css\fontello-ie7.css" />
+    <Content Include="AdminStyles\fontello\css\fontello.css" />
+    <Content Include="AdminStyles\fontello\font\fontello.svg" />
+    <Content Include="AdminStyles\js\bootstrap.bundle.min.js" />
+    <Content Include="AdminStyles\js\bootstrap.js" />
+    <Content Include="AdminStyles\js\bootstrap.min.js" />
+    <Content Include="AdminStyles\js\custom-script.js" />
+    <Content Include="AdminStyles\js\dataTables.bootstrap.min.js" />
+    <Content Include="AdminStyles\js\datatables.min.js" />
+    <Content Include="AdminStyles\js\fastclick.js" />
+    <Content Include="AdminStyles\js\gumshoe.min.js" />
+    <Content Include="AdminStyles\js\jquery-ui.js" />
+    <Content Include="AdminStyles\js\jquery.magnific-popup.js" />
+    <Content Include="AdminStyles\js\jquery.magnific-popup.min.js" />
+    <Content Include="AdminStyles\js\jquery.min.js" />
+    <Content Include="AdminStyles\js\jquery.nice-select.min.js" />
+    <Content Include="AdminStyles\js\jquery.rateyo.min.js" />
+    <Content Include="AdminStyles\js\jquery.slidereveal.js" />
+    <Content Include="AdminStyles\js\jquery.slimscroll.js" />
+    <Content Include="AdminStyles\js\jquery.slimscroll.min.js" />
+    <Content Include="AdminStyles\js\jquery.uploadPreview.js" />
+    <Content Include="AdminStyles\js\magicsuggest-min.js" />
+    <Content Include="AdminStyles\js\magicsuggest.js" />
+    <Content Include="AdminStyles\js\menumaker.js" />
+    <Content Include="AdminStyles\js\menumaker.min.js" />
+    <Content Include="AdminStyles\js\npm.js" />
+    <Content Include="AdminStyles\js\offcanvas.js" />
+    <Content Include="AdminStyles\js\owl.carousel.min.js" />
+    <Content Include="AdminStyles\js\return-to-top.js" />
+    <Content Include="AdminStyles\js\smooth-scroll.js" />
+    <Content Include="AdminStyles\js\smooth-scroll.min.js" />
+    <Content Include="AdminStyles\js\sticky-sidebar.js" />
+    <Content Include="AdminStyles\js\summernote-bs4.js" />
+    <Content Include="AdminStyles\js\summernote-bs4.min.js" />
+    <Content Include="AdminStyles\js\typeahead.jquery.js" />
+    <Content Include="AdminStyles\js\ultimate-bg.js" />
+    <Content Include="AdminStyles\js\venue-location.js" />
+    <Content Include="AdminStyles\summernote\css\bootstrap.min.css" />
+    <Content Include="AdminStyles\summernote\css\summernote-bs4.css" />
+    <Content Include="AdminStyles\summernote\js\bootstrap.bundle.min.js" />
+    <Content Include="AdminStyles\summernote\js\custom-script.js" />
+    <Content Include="AdminStyles\summernote\js\jquery.min.js" />
+    <Content Include="AdminStyles\summernote\js\summernote-bs4.js" />
+    <Content Include="AdminStyles\summernote\js\summernote-bs4.min.js" />
+    <Content Include="AdminStyles\summernote\summernote.html" />
+    <Content Include="App_Data\Database1.mdf" />
+    <Content Include="App_Data\Database1_log.ldf">
+      <DependentUpon>Database1.mdf</DependentUpon>
+    </Content>
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -135,8 +256,278 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="images\about-img-1.jpg" />
+    <Content Include="images\about-img-2.jpg" />
+    <Content Include="images\about-pageheader.jpg" />
+    <Content Include="images\admin-pic.jpg" />
+    <Content Include="images\align-center.jpg" />
+    <Content Include="images\align-left.jpg" />
+    <Content Include="images\align-right.jpg" />
+    <Content Include="images\app-store-icon.png" />
+    <Content Include="images\author-img.jpg" />
+    <Content Include="images\blog-single.jpg" />
+    <Content Include="images\bride-1822587_1920.jpg" />
+    <Content Include="images\category-location-img-1.jpg" />
+    <Content Include="images\category-location-img-2.jpg" />
+    <Content Include="images\category-location-img-3.jpg" />
+    <Content Include="images\category-location-img-4.jpg" />
+    <Content Include="images\category-location-img-5.jpg" />
+    <Content Include="images\category-location-img-6.jpg" />
+    <Content Include="images\category-location-img-7.jpg" />
+    <Content Include="images\category-location-img-8.jpg" />
+    <Content Include="images\category-location-img-9.jpg" />
+    <Content Include="images\catergory-florist.jpg" />
+    <Content Include="images\catergory-photographer.jpg" />
+    <Content Include="images\catergory-venue.jpg" />
+    <Content Include="images\couple-bg-img.jpg" />
+    <Content Include="images\couple-form-image.jpg" />
+    <Content Include="images\cta-img.jpg" />
+    <Content Include="images\dashboard-list-img-1.jpg" />
+    <Content Include="images\dashboard-list-img-2.jpg" />
+    <Content Include="images\dashboard-list-img-3.jpg" />
+    <Content Include="images\dashboard-list-img-4.jpg" />
+    <Content Include="images\dashboard-list-img-5.jpg" />
+    <Content Include="images\dashboard-list-img-6.jpg" />
+    <Content Include="images\dashboard-profile-couple.jpg" />
+    <Content Include="images\dashboard-profile.jpg" />
+    <Content Include="images\down-arrow.png" />
+    <Content Include="images\error-img.png" />
+    <Content Include="images\favicon.ico" />
+    <Content Include="images\footer-logo.png" />
+    <Content Include="images\gallery-thumb.jpg" />
+    <Content Include="images\hero-1.jpg" />
+    <Content Include="images\hero-image-2.jpg" />
+    <Content Include="images\hero-image-3.jpg" />
+    <Content Include="images\hero-image.jpg" />
+    <Content Include="images\howitwork-img.jpg" />
+    <Content Include="images\kb-pageheader.jpg" />
+    <Content Include="images\listsingle-slider-img-1.jpg" />
+    <Content Include="images\listsingle-slider-img-2.jpg" />
+    <Content Include="images\listsingle-slider-img-3.jpg" />
+    <Content Include="images\listsingle-slider-img-4.jpg" />
+    <Content Include="images\logo-white.png" />
+    <Content Include="images\logo.png" />
+    <Content Include="images\map-pin.png" />
+    <Content Include="images\page-header.jpg" />
+    <Content Include="images\play-store-icon.png" />
+    <Content Include="images\post-img-1.jpg" />
+    <Content Include="images\post-img-2.jpg" />
+    <Content Include="images\post-img-3.jpg" />
+    <Content Include="images\post-img-4.jpg" />
+    <Content Include="images\post-img-classic-1.jpg" />
+    <Content Include="images\post-img-classic-2.jpg" />
+    <Content Include="images\post-img-classic-3.jpg" />
+    <Content Include="images\post-img-classic-4.jpg" />
+    <Content Include="images\post-single-img-1.jpg" />
+    <Content Include="images\post-small-img-1.jpg" />
+    <Content Include="images\real-wed-gallery-img-1.jpg" />
+    <Content Include="images\real-wed-gallery-img-2.jpg" />
+    <Content Include="images\real-wed-gallery-img-3.jpg" />
+    <Content Include="images\real-wed-gallery-img-4.jpg" />
+    <Content Include="images\real-wed-gallery-img-5.jpg" />
+    <Content Include="images\real-wedding-img-1.jpg" />
+    <Content Include="images\real-wedding-img-2.jpg" />
+    <Content Include="images\real-wedding-img-3.jpg" />
+    <Content Include="images\real-wedding-img-4.jpg" />
+    <Content Include="images\real-wedding-img-5.jpg" />
+    <Content Include="images\real-wedding-img-6.jpg" />
+    <Content Include="images\real-wedding-img-7.jpg" />
+    <Content Include="images\real-wedding-img-8.jpg" />
+    <Content Include="images\real-wedding-img-9.jpg" />
+    <Content Include="images\real-weddings-single.jpg" />
+    <Content Include="images\recent-post-img-1.jpg" />
+    <Content Include="images\recent-post-img-2.jpg" />
+    <Content Include="images\recent-post-img-3.jpg" />
+    <Content Include="images\recent-post-img-4.jpg" />
+    <Content Include="images\related-post-img-1.jpg" />
+    <Content Include="images\related-post-img-2.jpg" />
+    <Content Include="images\related-post-img-3.jpg" />
+    <Content Include="images\review-pic-1.jpg" />
+    <Content Include="images\review-pic-2.jpg" />
+    <Content Include="images\review-pic-3.jpg" />
+    <Content Include="images\rsvp-page-header.jpg" />
+    <Content Include="images\secure-payment.png" />
+    <Content Include="images\signup-bg-img.jpg" />
+    <Content Include="images\sort_asc.png" />
+    <Content Include="images\sort_asc_disabled.png" />
+    <Content Include="images\sort_both.png" />
+    <Content Include="images\sort_desc.png" />
+    <Content Include="images\sort_desc_disabled.png" />
+    <Content Include="images\star.svg" />
+    <Content Include="images\supplier-1.jpg" />
+    <Content Include="images\supplier-2.jpg" />
+    <Content Include="images\supplier-3.jpg" />
+    <Content Include="images\supplier-4.jpg" />
+    <Content Include="images\supplier-5.jpg" />
+    <Content Include="images\supplier-6.jpg" />
+    <Content Include="images\supplier-7.jpg" />
+    <Content Include="images\supplier-8.jpg" />
+    <Content Include="images\supplier-9.jpg" />
+    <Content Include="images\supplier-cake-1.jpg" />
+    <Content Include="images\supplier-cake-2.jpg" />
+    <Content Include="images\supplier-cake-3.jpg" />
+    <Content Include="images\supplier-cake-4.jpg" />
+    <Content Include="images\supplier-cake-5.jpg" />
+    <Content Include="images\supplier-cake-6.jpg" />
+    <Content Include="images\supplier-cake-7.jpg" />
+    <Content Include="images\supplier-cake-8.jpg" />
+    <Content Include="images\supplier-cake-9.jpg" />
+    <Content Include="images\supplier-dress-2.jpg" />
+    <Content Include="images\supplier-dress-3.jpg" />
+    <Content Include="images\supplier-dress-4.jpg" />
+    <Content Include="images\supplier-dress-5.jpg" />
+    <Content Include="images\supplier-dress-6.jpg" />
+    <Content Include="images\supplier-dress-7.jpg" />
+    <Content Include="images\supplier-dress-8.jpg" />
+    <Content Include="images\supplier-florist-1.jpg" />
+    <Content Include="images\supplier-florist-2.jpg" />
+    <Content Include="images\supplier-florist-3.jpg" />
+    <Content Include="images\supplier-florist-4.jpg" />
+    <Content Include="images\supplier-florist-5.jpg" />
+    <Content Include="images\supplier-florist-6.jpg" />
+    <Content Include="images\supplier-florist-7.jpg" />
+    <Content Include="images\supplier-florist-8.jpg" />
+    <Content Include="images\supplier-florist-9.jpg" />
+    <Content Include="images\supplier-photographer-1.jpg" />
+    <Content Include="images\supplier-photographer-2.jpg" />
+    <Content Include="images\supplier-photographer-3.jpg" />
+    <Content Include="images\supplier-photographer-4.jpg" />
+    <Content Include="images\supplier-photographer-5.jpg" />
+    <Content Include="images\supplier-photographer-6.jpg" />
+    <Content Include="images\supplier-photographer-7.jpg" />
+    <Content Include="images\supplier-photographer-8.jpg" />
+    <Content Include="images\supplier-photographer-9.jpg" />
+    <Content Include="images\team-member-1.jpg" />
+    <Content Include="images\team-member-2.jpg" />
+    <Content Include="images\team-member-3.jpg" />
+    <Content Include="images\team-member-4.jpg" />
+    <Content Include="images\team-member-5.jpg" />
+    <Content Include="images\team-member-6.jpg" />
+    <Content Include="images\team-member-small-1.jpg" />
+    <Content Include="images\team-member-small-2.jpg" />
+    <Content Include="images\team-member-small-3.jpg" />
+    <Content Include="images\team-member-small-4.jpg" />
+    <Content Include="images\testimonial-1.jpg" />
+    <Content Include="images\testimonial-2.jpg" />
+    <Content Include="images\testimonial-3.jpg" />
+    <Content Include="images\ui-icons_444444_256x240.png" />
+    <Content Include="images\ui-icons_555555_256x240.png" />
+    <Content Include="images\user-pic-1.jpg" />
+    <Content Include="images\user-pic-2.jpg" />
+    <Content Include="images\user-pic-3.jpg" />
+    <Content Include="images\user-pic-4.jpg" />
+    <Content Include="images\user-profile.jpg" />
+    <Content Include="images\vendor-carousel-img-1.jpg" />
+    <Content Include="images\vendor-carousel-img-2.jpg" />
+    <Content Include="images\vendor-carousel-img-3.jpg" />
+    <Content Include="images\vendor-carousel-img-4.jpg" />
+    <Content Include="images\vendor-cat-img-1.jpg" />
+    <Content Include="images\vendor-cat-img-2.jpg" />
+    <Content Include="images\vendor-cat-img-3.jpg" />
+    <Content Include="images\vendor-cat-img-4.jpg" />
+    <Content Include="images\vendor-cat-img-5.jpg" />
+    <Content Include="images\vendor-cat-img-6.jpg" />
+    <Content Include="images\vendor-img-1.jpg" />
+    <Content Include="images\vendor-img-2.jpg" />
+    <Content Include="images\vendor-img-3.jpg" />
+    <Content Include="images\vendor-img-4.jpg" />
+    <Content Include="images\vendor-img-5.jpg" />
+    <Content Include="images\vendor-img-6.jpg" />
+    <Content Include="images\venue-pageheader.jpg" />
+    <Content Include="images\venue-single.jpg" />
+    <Content Include="images\venue_categories_img_1.jpg" />
+    <Content Include="images\venue_categories_img_2.jpg" />
+    <Content Include="images\venue_categories_img_3.jpg" />
+    <Content Include="images\venue_categories_img_4.jpg" />
+    <Content Include="images\venue_categories_img_5.jpg" />
+    <Content Include="images\venue_categories_img_6.jpg" />
+    <Content Include="images\videographer-category-small.jpg" />
+    <Content Include="images\wedding-443600_1280.jpg" />
+    <Content Include="images\wedding-cake-small.jpg" />
+    <Content Include="images\wedding-catering-small.jpg" />
+    <Content Include="images\wedding-dj-small.jpg" />
+    <Content Include="images\wedding-dresses-small.jpg" />
+    <Content Include="images\wedding-florist-small.jpg" />
+    <Content Include="images\wedding-gallery-img-1.jpg" />
+    <Content Include="images\wedding-gallery-img-2.jpg" />
+    <Content Include="images\wedding-gallery-img-3.jpg" />
+    <Content Include="images\wedding-honeymoon-small.jpg" />
+    <Content Include="images\wedding-photographer-small.jpg" />
+    <Content Include="images\widget-banner-img.jpg" />
+    <Content Include="images\workplace-img-1.jpg" />
+    <Content Include="images\workplace-img-2.jpg" />
+    <Content Include="Models\MyModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>MyModel.edmx</DependentUpon>
+      <LastGenOutput>MyModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\MyModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>MyModel.edmx</DependentUpon>
+      <LastGenOutput>MyModel.cs</LastGenOutput>
+    </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="AdminStyles\editor-fonts\summernote.eot" />
+    <Content Include="AdminStyles\editor-fonts\summernote.ttf" />
+    <Content Include="AdminStyles\editor-fonts\summernote.woff" />
+    <Content Include="AdminStyles\fontawesome\.DS_Store" />
+    <Content Include="AdminStyles\fontawesome\less\fa-brands.less" />
+    <Content Include="AdminStyles\fontawesome\less\fa-regular.less" />
+    <Content Include="AdminStyles\fontawesome\less\fa-solid.less" />
+    <Content Include="AdminStyles\fontawesome\less\fontawesome.less" />
+    <Content Include="AdminStyles\fontawesome\less\_animated.less" />
+    <Content Include="AdminStyles\fontawesome\less\_bordered-pulled.less" />
+    <Content Include="AdminStyles\fontawesome\less\_core.less" />
+    <Content Include="AdminStyles\fontawesome\less\_fixed-width.less" />
+    <Content Include="AdminStyles\fontawesome\less\_icons.less" />
+    <Content Include="AdminStyles\fontawesome\less\_larger.less" />
+    <Content Include="AdminStyles\fontawesome\less\_list.less" />
+    <Content Include="AdminStyles\fontawesome\less\_mixins.less" />
+    <Content Include="AdminStyles\fontawesome\less\_rotated-flipped.less" />
+    <Content Include="AdminStyles\fontawesome\less\_screen-reader.less" />
+    <Content Include="AdminStyles\fontawesome\less\_stacked.less" />
+    <Content Include="AdminStyles\fontawesome\less\_variables.less" />
+    <Content Include="AdminStyles\fontawesome\scss\fa-brands.scss" />
+    <Content Include="AdminStyles\fontawesome\scss\fa-regular.scss" />
+    <Content Include="AdminStyles\fontawesome\scss\fa-solid.scss" />
+    <Content Include="AdminStyles\fontawesome\scss\fontawesome.scss" />
+    <Content Include="AdminStyles\fontawesome\scss\_animated.scss" />
+    <Content Include="AdminStyles\fontawesome\scss\_bordered-pulled.scss" />
+    <Content Include="AdminStyles\fontawesome\scss\_core.scss" />
+    <Content Include="AdminStyles\fontawesome\scss\_fixed-width.scss" />
+    <Content Include="AdminStyles\fontawesome\scss\_icons.scss" />
+    <Content Include="AdminStyles\fontawesome\scss\_larger.scss" />
+    <Content Include="AdminStyles\fontawesome\scss\_list.scss" />
+    <Content Include="AdminStyles\fontawesome\scss\_mixins.scss" />
+    <Content Include="AdminStyles\fontawesome\scss\_rotated-flipped.scss" />
+    <Content Include="AdminStyles\fontawesome\scss\_screen-reader.scss" />
+    <Content Include="AdminStyles\fontawesome\scss\_stacked.scss" />
+    <Content Include="AdminStyles\fontawesome\scss\_variables.scss" />
+    <Content Include="AdminStyles\fontawesome\webfonts\fa-brands-400.eot" />
+    <Content Include="AdminStyles\fontawesome\webfonts\fa-brands-400.ttf" />
+    <Content Include="AdminStyles\fontawesome\webfonts\fa-brands-400.woff" />
+    <Content Include="AdminStyles\fontawesome\webfonts\fa-brands-400.woff2" />
+    <Content Include="AdminStyles\fontawesome\webfonts\fa-regular-400.eot" />
+    <Content Include="AdminStyles\fontawesome\webfonts\fa-regular-400.ttf" />
+    <Content Include="AdminStyles\fontawesome\webfonts\fa-regular-400.woff" />
+    <Content Include="AdminStyles\fontawesome\webfonts\fa-regular-400.woff2" />
+    <Content Include="AdminStyles\fontawesome\webfonts\fa-solid-900.eot" />
+    <Content Include="AdminStyles\fontawesome\webfonts\fa-solid-900.ttf" />
+    <Content Include="AdminStyles\fontawesome\webfonts\fa-solid-900.woff" />
+    <Content Include="AdminStyles\fontawesome\webfonts\fa-solid-900.woff2" />
+    <Content Include="AdminStyles\fontello\font\fontello.eot" />
+    <Content Include="AdminStyles\fontello\font\fontello.ttf" />
+    <Content Include="AdminStyles\fontello\font\fontello.woff" />
+    <Content Include="AdminStyles\fontello\font\fontello.woff2" />
+    <Content Include="images\.DS_Store" />
+    <EntityDeploy Include="Models\MyModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>MyModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\MyModel.edmx.diagram">
+      <DependentUpon>MyModel.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -148,7 +539,9 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -162,10 +555,18 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Shared\_Layout_vendor.cshtml" />
+    <Content Include="Views\Home\CreateVendor.cshtml" />
+    <Content Include="Views\User\Register.cshtml" />
+    <Content Include="Views\User\VerifyAccount.cshtml" />
+    <Content Include="Views\User\Login.cshtml" />
+    <Content Include="Views\User\Dashboard.cshtml" />
+    <Content Include="Views\Admin\Profile.cshtml" />
+    <Content Include="Views\User\Profile.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
+    <Folder Include="Admin\" />
+    <Folder Include="Db\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -179,6 +580,9 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

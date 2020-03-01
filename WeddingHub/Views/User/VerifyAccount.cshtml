@@ -1,0 +1,24 @@
+﻿
+@{
+    ViewBag.Title = "VerifyAccount";}
+@Styles.Render("~/Content/css")
+<link href="~/AdminStyles/css/style.css" rel="stylesheet" />
+<link href="~/AdminStyles/css/bootstrap.min.css" rel="stylesheet" />
+<link href="~/AdminStyles/css/owl.carousel.css" rel="stylesheet" />
+<link href="~/AdminStyles/fontawesome/css/fontawesome-all.css" rel="stylesheet" />
+<link href="~/AdminStyles/fontello/css/fontello.css" rel="stylesheet" />
+@Scripts.Render("~/bundles/modernizr")
+<h2>VerifyAccount</h2>
+
+@if (ViewBag.Status != null && Convert.ToBoolean(ViewBag.Status))
+{
+    <div class="alert alert-success">
+        <strong>Success!</strong> Your account has been activated successfully. Click here to @Html.ActionLink("Login", "Login", "User")
+    </div>
+}
+else
+{
+    <div class="alert alert-danger">
+        <strong>Error!</strong> @ViewBag.Message
+    </div>
+} 

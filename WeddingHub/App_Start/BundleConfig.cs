@@ -20,11 +20,27 @@ namespace WeddingHub
                         "~/Scripts/modernizr-*"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                      "~/Scripts/bootstrap.js"));
+                      "~/AdminStyles/js/bootstrap.min.js",
+                      "~/AdminStyles/js/jquery.nice-select.min.js",
+                      "~/AdminStyles/js/menumaker.min.js",
+                      "~/AdminStyles/js/fastclick.js",
+                      "~/AdminStyles/js/return-to-top.js",
+                      "~/AdminStyles/js/custom-script.js",
+                      "~/AdminStyles/js/bootstrap.min.js",
+                      "~/AdninStyles/js/jquery.min.js"
+                   
+                      ));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
-                      "~/Content/site.css"));
+                      "~/AdminStyles/css/bootstrap.min.css",
+                  
+                      "~/AdminStyles/fontawesome/css/fontawesome-all.css",
+                      "~/AdminStyles/fontello/css/fontello.css",
+                      "~/AdminStyles/css/owl.carousel.css",
+                      "~/AdminStyles/css/owl.theme.default.css",
+       
+                      "~/AdminStyles/css/style.css"
+           ));
         }
     }
 }

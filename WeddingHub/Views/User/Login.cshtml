@@ -1,0 +1,103 @@
+﻿@model WeddingHub.Models.UserLogin
+
+@{
+    Layout = null;
+}
+@Styles.Render("~/Content/css")
+<link href="~/AdminStyles/css/style.css" rel="stylesheet" />
+<link href="~/AdminStyles/css/bootstrap.min.css" rel="stylesheet" />
+<link href="~/AdminStyles/css/owl.carousel.css" rel="stylesheet" />
+<link href="~/AdminStyles/fontawesome/css/fontawesome-all.css" rel="stylesheet" />
+<link href="~/AdminStyles/fontello/css/fontello.css" rel="stylesheet" />
+@Scripts.Render("~/bundles/modernizr")
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Login</title>
+</head>
+<body class="couple-bg-image">
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <div class="couple-form">
+        <div class="container">
+            <div class="row ">
+                <div class="offset-xl-3 col-xl-6 offset-lg-3 col-lg-6 col-md-12 col-sm-12 col-12  ">
+                    <!-- couple-head -->
+                    <div class="couple-head">
+                        <a href="index.html"><img src="../../images/logo.png" alt="Wedding Vendor & Supplier Directory HTML Template "></a>
+                    </div>
+                    <!-- /.couple-head -->
+                    <!-- st-tab -->
+                    <div class="st-tab">
+                        <ul class="nav nav-tabs nav-justified" id="Mytabs" role="tablist">
+                            <li class="nav-item">
+                                <h2>Login</h2>
+                        </ul>
+                        <div class="tab-content" id="myTabContent">
+                            <div class="tab-pane fade show active" id="tab1" role="tabpanel" aria-labelledby="tab-1">
+                                <div class="container">
+                                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 ">
+                                        <!-- form-heading-title -->
+                                        <div class="vendor-form-title">
+                                            <h3 class="mb-2">Business Register</h3>
+                                            <p>Join Weddingsto get your business listed or to claim your listing for FREE!</p>
+                                        </div>
+                                        <!-- /.form-heading-title -->
+                                        <!-- register-form -->
+
+
+
+                                        @using (Html.BeginForm())
+                                        {
+                                            @Html.AntiForgeryToken()
+
+                                        <div class="form-horizontal">
+                                            <h4>UserLogin</h4>
+                                            <hr />
+
+                                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                            <div class="form-group">
+                                                @Html.LabelFor(model => model.EmailID, htmlAttributes: new { @class = "control-label col-md-12" })
+                                                <div class="col-md-10">
+                                                    @Html.EditorFor(model => model.EmailID, new { htmlAttributes = new { @class = "form-control" } })
+                                                    @Html.ValidationMessageFor(model => model.EmailID, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-12" })
+                                                <div class="col-md-10">
+                                                    @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
+                                                    @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                @Html.LabelFor(model => model.RememberMe, htmlAttributes: new { @class = "control-label col-md-12" })
+                                                <div class="col-md-10">
+                                                    <div class="checkbox">
+                                                        @Html.EditorFor(model => model.RememberMe)
+                                                        @Html.ValidationMessageFor(model => model.RememberMe, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                          
+                                            <div class="form-group">
+                                                <div class="col-md-offset-2 col-md-12">
+                                                    <input type="submit" value="Login" class="btn btn-default" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        }
+
+                                        <div>
+                                            @Html.ActionLink("Back to List", "Index")
+                                        </div>
+                                        <div>
+                                            @Html.ActionLink("Register", "Register","User")
+                                        </div>
+</body>
+</html>
